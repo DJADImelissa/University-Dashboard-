@@ -1,0 +1,264 @@
+loadData();
+
+function loadData(){	
+	httpRequest = new XMLHttpRequest();	
+	httpRequest.open('GET', '/api/data');
+	httpRequest.onreadystatechange = function () {
+		if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+			jsonData1 = JSON.parse(httpRequest.response);
+			update_Bars(jsonData1);			
+		}
+	};
+	httpRequest.send();
+	
+	httpRequest2 = new XMLHttpRequest();	
+	httpRequest2.open('GET', '/api/data2');
+	httpRequest2.onreadystatechange = function () {
+		if (httpRequest2.readyState === 4 && httpRequest2.status === 200) {
+			jsonData2 = JSON.parse(httpRequest2.response);
+			update_Lines(jsonData2);
+		}
+	};
+	httpRequest2.send();
+	
+	httpRequest3 = new XMLHttpRequest();	
+	httpRequest3.open('GET', '/api/data3');
+	httpRequest3.onreadystatechange = function () {
+		if (httpRequest3.readyState === 4 && httpRequest3.status === 200) {
+			jsonData1 = JSON.parse(httpRequest3.response);
+			update_Pie(jsonData1);
+		}
+	};
+	httpRequest3.send();
+
+	httpRequest5 = new XMLHttpRequest();	
+	httpRequest5.open('GET', '/api/data9');
+	httpRequest5.onreadystatechange = function () {
+		if (httpRequest5.readyState === 4 && httpRequest5.status === 200) {
+			jsonData1 = JSON.parse(httpRequest5.response);
+			update_double_bar(jsonData1);			
+		}
+	};
+	httpRequest5.send();
+
+	httpRequest6 = new XMLHttpRequest();	
+	httpRequest6.open('GET', '/api/data6');
+	httpRequest6.onreadystatechange = function () {
+		if (httpRequest6.readyState === 4 && httpRequest6.status === 200) {
+			jsonData1 = JSON.parse(httpRequest6.response);
+			update_Dog(jsonData1);
+		}
+	};
+	httpRequest6.send();
+
+	httpRequest7 = new XMLHttpRequest();	
+	httpRequest7.open('GET', '/api/data8');
+	httpRequest7.onreadystatechange = function () {
+		if (httpRequest7.readyState === 4 && httpRequest7.status === 200) {
+			jsonData1 = JSON.parse(httpRequest7.response);
+			update_BigNumbers(jsonData1);
+		}
+	};
+	httpRequest7.send();
+}
+
+// Fonction du Bar chart 
+function update_Bars(jsonData){	
+
+	var labels = jsonData.map(function(e) {
+	   return e.specialite;
+	});
+	
+	var data = jsonData.map(function(e) {
+	   return e.n;
+	});
+	
+	
+	new Chart(document.getElementById("bar-chart"), {
+		type: 'bar',
+		data: {
+		  labels: labels,
+		  datasets: [
+			{
+			  label: "Students",
+			  backgroundColor: ["#98c99c","#61a27a","#52bf90", "#49ab81","#419873","#398564","#317256"],
+			  data: data
+			}
+		  ]
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}]
+			},
+		  responsive: false,
+		  maintainAspectRatio: true,	
+		  legend: { display: false },
+		  title: {
+			display: true,
+			text: 'Bar Chart représentant le nombre d'+'étudiants par spécialité',
+			position: 'bottom'
+		}
+		}
+	});
+}
+
+// Fonction de Line chart
+function update_Lines(jsonData){
+	var labels = jsonData.annee;
+	
+	for(d of jsonData.datasets){
+		d.fill = false;				  
+		d.borderColor = '#'+Math.floor(Math.random()*16777215).toString(16);
+		d.borderWidth=2;
+		d.radius=1;			
+	}			
+	
+	var data = jsonData.datasets;
+
+	new Chart(document.getElementById("line-chart"), {
+		type: 'line',
+		data: {
+			labels: labels,
+			datasets: data
+		},
+		options: {						
+			responsive: false,
+			maintainAspectRatio: true,
+			title: {
+				display: true,
+				text: 'Line Chart représentant l'+'evolution du nombre d'+ 'étudiants par an pour chaque spécialité',
+				position: 'bottom'
+			},
+			legend:{
+				position:'top'
+			}
+		}
+	});
+}
+
+// fonction du Pie chart 
+function update_Pie(jsonData){
+	var labels = jsonData.map(function(e) {
+	   return e.specialite;
+	});
+	
+	var data = jsonData.map(function(e) {
+	   return e.n;
+	});
+	
+	new Chart(document.getElementById("pie-chart"), {
+		type: 'pie',
+		data: {
+		  labels: labels,
+		  datasets: [{
+			label: "Population (millions)",
+			backgroundColor: ["#98c99c","#61a27a","#52bf90", "#49ab81","#419873","#398564","#317256"],
+			data: data
+		  }]
+		},
+		options: {
+		  responsive: false,
+		  maintainAspectRatio: true,
+		  title: {
+			display: true,
+			text: 'Pie Chart représentant le nombre d'+'admis par spécialité',
+			position: 'bottom'
+		},
+		  legend:{
+			position:'right'
+		  }
+		}
+	});	
+}
+
+// fonction du doughnut
+function update_Dog(jsonData){
+    var labels = jsonData.map(function(e) {
+           return e.annee;
+        });
+        
+        var data = jsonData.map(function(e) {
+           return e.n;
+		   console.log(data);
+        });
+        
+        new Chart(document.getElementById("doughnut-chart"), {
+            type: 'doughnut',
+            data: {
+              labels:labels,
+              datasets: [
+                {
+                  backgroundColor: ["#98c99c","#6ca088","#61a27a"],
+                  data:data
+				  
+                }
+              ]
+            },
+            options: {
+            responsive:false,
+			title: {
+				display: true,
+				text: 'Doughnut Chart représentant le nombre d'+'admis par an',
+				position: 'bottom'
+			},
+			  legend:{
+				  position: 'left'
+			  }
+            }
+        });
+    }
+
+// fonction des stacked bars
+	function update_double_bar(jsonData) {
+		var labels = jsonData.annee;
+		var data = jsonData.datasets;
+		colors = ["#D5BFBF", "#8CA1A5", "#E7D9EA", "#84A9AC", "#D8B9C3", "#CAE8D5", "#EDE4E0", "#BCCEF8", "#98A8F8", "#F8EDE3", "#BCCEF8"]
+		for (d of jsonData.datasets) {
+			d.fill = false;
+			const random = Math.floor(Math.random() * 10);
+			c = colors[random]
+			d.borderWidth = 2;
+			d.radius = 1;
+			d.backgroundColor = c;
+		}
+		new Chart(document.getElementById("bar-chart-double"), {
+			type: 'bar',
+			data: {
+				labels: labels,
+				datasets: data
+			},
+			options: {
+				responsive: true,
+				legend: {
+					position: 'left'
+				},
+				title: {
+					display: true,
+					text: 'Bar Chart représentants l'+'evolution du nombre d' + 'étudiants par sexe, par année',
+					position: 'bottom'
+				}
+			}
+		});
+	}
+
+	// fonction pour afficher les données sur les cartes 
+	function update_BigNumbers(jsonData){	
+		var i=1;
+		for(d of jsonData){		
+			region = document.getElementById("spe"+i);	
+			
+			
+			label = region.getElementsByClassName("speLabel")[0];
+			pop = region.getElementsByClassName("spePop")[0];
+			
+			label.innerHTML = d["specialite"];
+			pop.innerHTML = d["count(*)"];
+			
+			
+			i++;
+		}
+	}

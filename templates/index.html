@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='all.css')}}"/>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+</head>
+<body>
+    <div class="container">
+        <div class="topbar">
+            <div class="logo">
+                <img src="{{url_for('static', filename='img/logo.png')}}" height="60px" width="210px"/>
+            </div>
+            <div class="search">
+                <input type="text" id="search" placeholder="search here">
+                <label for="search"><i class="uil uil-search"></i></label>
+            </div>
+
+            <button id="btn_refresh" onclick="loadData()">
+                Update
+            </button>
+        </div>
+
+        <div class="sidebar">
+            <ul>
+                <li>
+                    <a href="/index">
+                        <i class="uil uil-presentation-line"></i>
+                        <span> Dashboard </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/index2">
+                        <i class="uil uil-user"></i>
+                        <span> Students </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="uil uil-setting"></i>
+                        <span> settings </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="uil uil-question-circle"></i>
+                        <span> help </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/">
+                        <i class="uil uil-sign-out-alt"></i>
+                        <span> Log out </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="main">
+            <div class="cards" >
+                <div class="card"id="spe1">
+                    <div class="card-content">
+                        <div class="spe_title">
+                            <h2 class="speLabel">         
+                            </h2>
+                        </div>
+                        <div class="number">
+                            <h3 class="spePop">
+        
+                            </h3>
+                        </div>
+                        <div class="card-name">students</div>
+                    </div>
+                    <div class="icon-box">
+                        <i class="uil uil-book-reader"></i>
+                    </div>
+                </div>
+
+                <div class="card" id="spe2">
+                    <div class="card-content">
+                        <div class="spe_title">
+                            <h2 class="speLabel">         
+                            </h2>
+                        </div>
+                        <div class="number"> 
+                            <h3 class="spePop">
+        
+                            </h3>
+                        </div>
+                        <div class="card-name">students</div>
+                    </div>
+                    <div class="icon-box">
+                        <i class="uil uil-book-reader"></i>
+                    </div>
+                </div>
+
+                <div class="card" id="spe3">
+                    <div class="card-content">
+                        <div class="spe_title">
+                            <h2 class="speLabel">         
+                            </h2>
+                        </div>
+                        <div class="number">
+                            <h3 class="spePop">
+        
+                            </h3>
+                        </div>
+                        <div class="card-name">students</div>
+                    </div>
+                    <div class="icon-box">
+                        <i class="uil uil-book-reader"></i>
+                    </div>
+                </div>
+
+                <div class="card" id="spe4">
+                    <div class="card-content">
+                        <div class="spe_title">
+                            <h2 class="speLabel">         
+                            </h2>
+                        </div>
+                        <div class="number">
+                            <h3 class="spePop">
+        
+                            </h3>
+                        </div>
+                        <div class="card-name">students</div>
+                    </div>
+                    <div class="icon-box">
+                        <i class="uil uil-book-reader"></i>
+                    </div>
+                </div>
+
+                <div class="card" id="spe5">
+                    <div class="card-content">
+                        <div class="spe_title">
+                            <h2 class="speLabel">         
+                            </h2>
+                        </div>
+                        <div class="number">
+                            <h3 class="spePop">
+        
+                            </h3>
+                        </div>
+                        <div class="card-name">students</div>
+                    </div>
+                    <div class="icon-box">
+                        <i class="uil uil-book-reader"></i>
+                    </div>
+                </div>
+
+                <div class="card" id="spe6">
+                    <div class="card-content">
+                        <div class="spe_title">
+                            <h2 class="speLabel">         
+                            </h2>
+                        </div>
+                        <div class="number">
+                            <h3 class="spePop">
+        
+                            </h3>
+                        </div>
+                        <div class="card-name">students</div>
+                    </div>
+                    <div class="icon-box">
+                        <i class="uil uil-book-reader"></i>
+                    </div>
+                </div>
+
+                <div class="card" id="spe7">
+                    <div class="card-content">
+                        <div class="spe_title">
+                            <h2 class="speLabel">         
+                            </h2>
+                        </div>
+                        <div class="number">
+                            <h3 class="spePop">
+        
+                            </h3>
+                        </div>
+                        <div class="card-name">students</div>
+                    </div>
+                    <div class="icon-box">
+                        <i class="uil uil-book-reader"></i>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="charts">
+                <div class="chart" id="line-chars">
+                    <h2>Evolution du nombre d'étudiants par an pour chaque spécialité </h2>
+                    <canvas id="line-chart" height="230" width="600"></canvas>
+                </div>
+                <div class="chart" id="doughnut">
+                    <h2> Nombre d'admis par spécialité</h2>
+                    <canvas id="pie-chart" width="270" height="200"></canvas>
+                </div>
+                <div class="chart" id="bars">
+                    <h2> Nombre d'étudiants par spécialité </h2>
+                    <canvas id="bar-chart" height="300" width="450"></canvas>
+                </div>
+                <div class="chart" id="doughnut">
+                    <h2> Nombre d'admis par an</h2>
+                    <canvas id="doughnut-chart" width="300" height="200"></canvas>
+                </div>
+                <div class="chart" id="doughnut">
+                    <h2>Evolution du nombre d'étudiants par sexe, par année</h2>
+                    <canvas id="bar-chart-double" height="220" width="600"></canvas>
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+  
+    <script src="{{url_for('static', filename='script.js')}}"></script>
+</body>
+</html>

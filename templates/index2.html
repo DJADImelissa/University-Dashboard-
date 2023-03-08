@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+	<head>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+		<link rel="stylesheet" href="{{url_for('static', filename='all.css')}}"/>	
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+	</head>
+	<body>
+		<div class="container">
+            <div class="topbar">
+                <div class="logo">
+                    <img src="{{url_for('static', filename='img/logo.png')}}" height="60px" width="210px"/>
+                </div>
+                <div class="search">
+                    <input type="text" id="search" placeholder="search here">
+                    <label for="search"><i class="uil uil-search"></i></label>
+                </div>
+    
+                <button id="btn_refresh" onclick="loadData()">
+                    Update
+                </button>
+            </div>
+    
+            <div class="sidebar">
+                <ul>
+                    <li>
+                        <a href="/index">
+                            <i class="uil uil-presentation-line"></i>
+                            <span> Dashboard </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/index2">
+                            <i class="uil uil-user"></i>
+                            <span> Students </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="uil uil-setting"></i>
+                            <span> settings </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="uil uil-question-circle"></i>
+                            <span> help </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/">
+                            <i class="uil uil-sign-out-alt"></i>
+                            <span> Log out </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+		<main class="main">
+			<div class=" student_container">
+
+                <table border="1" class="content-table" id="card-table">
+                    <tr>
+                      <th class="col_text">Annee</th>
+                      <th class="col_number">Matricule </th>
+                      <th class="col_text">Nom</th>
+                      <th class="col_text">Prenom</th>
+                      <th class="col_text">Sexe</th>
+                      <th class="col_text">Specialite</th>
+                      <th class="col_number">Moyenne</th>
+                    </tr>
+                  </table>
+            </div>
+		  </main>
+		  <footer class="footer">
+			<p></p>
+		</footer>
+		</div>
+        <script src="{{url_for('static', filename='script.js')}}"></script>
+        <script src="{{url_for('static', filename='script2.js')}}"></script>
+	</body>
+</html>
